@@ -1,10 +1,13 @@
 {
   "name": "tartufo",
   "version": "1.0.0",
-  "description": "",
+  "description": "A super light version of truffle!",
   "main": "ethereum.js",
   "scripts": {
     "start": "node ethereum.js"
+  },
+  "engines": {
+    "node": ">=6.3.1"
   },
   "author": "Calogero Mandracchia",
   "license": "MIT",
@@ -12,8 +15,26 @@
     "solc": "^0.4.24",
     "web3": "^1.0.0-beta.34"
   },
+  "keywords": [
+    "truffle",
+    "solc",
+    "web3",
+    "ethereum",
+    "compile",
+    "deploy",
+    "multiple",
+    "smartcontract",
+    "smart contract",
+    "dapps",
+    "solidity",
+    "blockchain"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/CalogeroMandracchia/tartufo.git"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/CalogeroMandracchia/tartufo/issues"
+  },
+  "homepage": "https://github.com/CalogeroMandracchia/tartufo#readme"
 }
