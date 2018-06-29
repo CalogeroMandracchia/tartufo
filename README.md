@@ -13,7 +13,9 @@ $ npm install --save tartufo
 ```js
 const { connect, compileDeploy } = require('tartufo');
 const web3 = await connect(socket);
-const myContract = await compileDeploy(web3, pathFolder, pathContract);
+
+//args are the parameters passed to the costructor for the deploy
+const myContract = await compileDeploy(web3, pathFolder, pathContract, args, gas, gasprice);
 ```
 
 ### How to use it:
@@ -29,9 +31,9 @@ const main = async () => {
         //pathFolder must contains all contracts to be imported
         const [ pathFolder, pathContract ] = [ 'contracts/', 'Example.sol'];
         
-        const myContract = await compileDeploy(web3, pathFolder, pathContract);
+        const myContract = await compileDeploy(web3, pathFolder, pathContract, [], 6000000, 1);
 
-        myContract.methods.myMethod(123).call({from: web3.eth.defaultAccount}, (error, result) => { /* ... */});
+        myContract.methods.myMethod(123).call({from: web3.eth.defaultAccount, gas: 1000000}, (error, result) => { /* ... */});
 
     } catch(err) {
         console.log(err);

@@ -21,7 +21,7 @@ const connect = async socket => {
 
 const compile = (pathContract) => {
     const _findImports = path => {
-        console.log(`importing library: ${path}`);
+        console.log(`importing contract: ${path}`);
         const data = fs.readFileSync(path, 'utf8');
         return { contents: data };
     }
@@ -35,32 +35,36 @@ const createContract = (web3, jsonInterface) => {
     return smartContract;
 }
 
-const deploy = async (contract, fromAccount, data, args) => {
-    console.log(`deploying..`);
+const deploy = async (contract, fromAccount, data, args=[], gas=6000000, gasPrice=1) => {
+    try {
+        console.log(`deploying..`);
 
-    const onSend =  (error, transactionHash) => { if(error) { console.log(`onSend error: ${error}`);} }
-    const onError =  error => console.log(`onError: ${error}`);
-    const onTxHash = transactionHash => console.log(`onTxHash: ${transactionHash}`);
-    const onReceipt = receipt => console.log(`onReceipt: ${receipt.contractAddress}`);
-    const onConfirmation = (confirmationNumber, receipt) => console.log(`onConfirmation: ${confirmationNumber}, ${receipt.blockNumber}`);
-   
-    const { options: { address } } = await contract.deploy({data: data, arguments: args})
-        .send({from: fromAccount, gas: 1500000,  gasPrice: '3'}, onSend)
-        .on('error', onError)
-        .on('transactionHash', onTxHash)
-        .on('receipt', onReceipt)
-        .on('confirmation', onConfirmation)
-    console.log(`onResolve: ${address}`);
-    console.log(`deployed in ${address}`);
-    return address;
+        const onSend =  (error, transactionHash) => { if(error) { console.log(`onSend error: ${error}`);} }
+        const onError =  error => console.log(`onError: ${error}`);
+        const onTxHash = transactionHash => console.log(`onTxHash: ${transactionHash}`);
+        const onReceipt = receipt => console.log(`onReceipt: ${receipt.contractAddress}`);
+        const onConfirmation = (confirmationNumber, receipt) => console.log(`onConfirmation: ${confirmationNumber}, ${receipt.blockNumber}`);
+       
+        const { options: { address } } = await contract.deploy({data: data, arguments: args})
+            .send({from: fromAccount, gas: gas, gasPrice: gasPrice}, onSend)
+            .on('error', onError)
+            .on('transactionHash', onTxHash)
+            .on('receipt', onReceipt)
+            .on('confirmation', onConfirmation)
+        console.log(`onResolve: ${address}`);
+        console.log(`deployed in ${address}`);
+        return address;
+    } catch (err) {
+        console.log(err);
+    }
 }
 
-const compileDeploy = async (web3, pathFolder, pathContract) => {
+const compileDeploy = async (web3, pathFolder, pathContract, gas, gasPrice) => {
     try {
         const output = compile(`${pathFolder}${pathContract}`);
         const keyContract = `${pathFolder}${pathContract}:${pathContract.slice(0, -4)}`;
         const myContract = createContract(web3, JSON.parse(output.contracts[keyContract].interface));
-        const addr = await deploy(myContract, web3.eth.defaultAccount, output.contracts[keyContract].bytecode);
+        const addr = await deploy(myContract, web3.eth.defaultAccount, output.contracts[keyContract].bytecode, gas, gasPrice);
         myContract.options.address = addr;
         return myContract;
     } catch(err) {
@@ -75,5 +79,8 @@ output.contracts["contracts/Uno.sol:Uno"].bytecode = linker.linkBytecode(output.
 
 module.exports = {
     connect,
+    compile,
+    createContract,
+    deploy,
     compileDeploy
 }
