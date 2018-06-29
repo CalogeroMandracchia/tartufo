@@ -29,6 +29,7 @@ const main = async () => {
         const web3 = await connect(socket);
         
         //pathFolder must contains all contracts to be imported
+        //pathContract must be with the first letter uppercase
         const [ pathFolder, pathContract ] = [ 'contracts/', 'Example.sol'];
         
         const myContract = await compileDeploy(web3, pathFolder, pathContract, [], 6000000, 1);
