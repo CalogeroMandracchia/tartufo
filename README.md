@@ -3,7 +3,7 @@
 A super light version of truffle!
 
 With tartufo you can forget about compiling, migrating, ... 
-You just need to specify then main contract and the folder containing all the others smart contracts required from the main one.
+You just need to specify the main contract and the folder containing all the others smart contracts required from the main one.
 
 That's right, tartufo **will __automatically__ find all the __dependencies__!**
 
@@ -35,7 +35,7 @@ Finally simply install tartufo.
 ```sh
 $ npm install tartufo --save
 ```
-**Please** refer to this guide for web3 since i'm using the latest version:  [web3 1.0](http://web3js.readthedocs.io/en/1.0/index.html)
+**Please** refer to this guide for web3 since I'm using the latest version:  [web3 1.0](http://web3js.readthedocs.io/en/1.0/index.html)
 
 ## API
 
