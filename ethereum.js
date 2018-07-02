@@ -35,7 +35,7 @@ const createContract = (web3, jsonInterface) => {
     return smartContract;
 }
 
-const deploy = async (contract, fromAccount, data, args=[], gas=6000000, gasPrice=1) => {
+const deploy = async (contract, fromAccount, data, args=[], gas=8000000, gasPrice=1) => {
     try {
         console.log(`deploying..`);
 

@@ -1,6 +1,6 @@
 {
   "name": "tartufo",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A super light version of truffle!",
   "main": "ethereum.js",
   "scripts": {
@@ -16,18 +16,11 @@
     "web3": "^1.0.0-beta.34"
   },
   "keywords": [
-    "truffle",
-    "solc",
-    "web3",
-    "ethereum",
+    "solidity",
     "compile",
     "deploy",
-    "multiple",
-    "smartcontract",
-    "smart contract",
-    "dapps",
-    "solidity",
-    "blockchain"
+    "web3",
+    "solc"
   ],
   "repository": {
     "type": "git",
