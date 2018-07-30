@@ -1,7 +1,7 @@
 {
   "name": "tartufo",
-  "version": "1.1.4",
-  "description": "A super light version of truffle!",
+  "version": "1.1.6",
+  "description": "automatically compiling and deploying solidity in one shot!",
   "main": "ethereum.js",
   "scripts": {
     "start": "node ethereum.js"
@@ -20,7 +20,8 @@
     "compile",
     "deploy",
     "web3",
-    "solc"
+    "solc",
+    "truffle"
   ],
   "repository": {
     "type": "git",

@@ -1,6 +1,19 @@
 # tartufo
 
-A super light version of truffle!
+Do you want to help improve this module? Open an [issue](https://github.com/CalogeroMandracchia/tartufo/issues)! Thanks! 
+
+```js
+
+    const web3 = await connect("ws://localhost:7545");
+
+    const [ pathFolder, pathContract ] = [ 'contracts/', 'Example.sol'];
+
+    const myContract = await compileDeploy(web3, pathFolder, pathContract, [], 6000000, 1);
+
+    //that's it! Now you can call all your methods!
+    myContract.methods.myMethod(123).call({ /* ... */};
+
+```
 
 With tartufo you can forget about compiling, migrating, ... 
 You just need to specify the main contract and the folder containing all the others smart contracts required from the main one.
@@ -69,9 +82,10 @@ const web3 = await deploy(contract, fromAccount, data, args=[], gas=6000000, gas
 const myContract = await compileDeploy(web3, pathFolder, pathContract, args, gas, gasprice);
 ```
 
-### How to use it:
+### Full example:
 
 ```js
+
 const { connect, compileDeploy } = require('tartufo');
 
 const main = async () => {
@@ -83,7 +97,13 @@ const main = async () => {
         
         const myContract = await compileDeploy(web3, pathFolder, pathContract, [], 6000000, 1);
 
-        myContract.methods.myMethod(123).call({from: web3.eth.defaultAccount, gas: 1000000}, (error, result) => { /* ... */});
+        const params = {
+            from: web3.eth.defaultAccount,
+            gas: 1000000},
+            (error, result) => { /* ... */ }
+        }
+
+        myContract.methods.myMethod(123).call(params);
 
     } catch(err) {
         console.log(err);
